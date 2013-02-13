@@ -1,1 +1,24 @@
-mas cositas
+df <- data.frame(Postcode=c("EC3M 7HA", "EC2P 2EJ"),
+Tip=c("<a href='http://www.lloyds.com'>Lloyd's</a>",
+"<a href='http://www.guildhall.cityoflondon.gov.uk/'>Guildhall</a>"))
+M2 <- gvisMap(df, "Postcode", "Tip",
+options=list(showTip=TRUE, mapType='normal',
+enableScrollWheel=TRUE, width=500, height=300))
+plot(M2)
+
+
+## Add the mean
+CityPopularity$Mean=mean(CityPopularity$Popularity)
+CC <- gvisComboChart(CityPopularity, xvar='City',
+          yvar=c('Mean', 'Popularity'),
+          options=list(seriesType='bars',
+                       width=450, height=300,
+                       title='City Popularity',
+                       series='{0: {type:"line"}}'))
+plot(CC)
+
+
+Geo <- gvisGeoChart(Exports, locationvar='Country', colorvar='Profit',
+options=list(height=300, width=350))
+Tbl <- gvisTable(Exports, options=list(height=300, width=200))
+plot(gvisMerge(Geo, Tbl, horizontal=TRUE))
